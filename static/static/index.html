@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusEye AI · 智慧空間人流分析</title>
+  <link rel="icon" type="image/png" href="/static/campus-eye-logo.png" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+  <script src="/static/script.js" defer></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><img class="brand-logo" src="/static/campus-eye-logo.png" alt="CampusEye AI Logo" /><div><strong>CampusEye <span>AI</span></strong><small>SMART SPACE INTELLIGENCE</small></div></div>
+    <div class="nav-label">管理中心</div>
+    <a class="nav active" href="#dashboard"><span class="nav-icon">▦</span>總覽儀表板 <span class="nav-dot"></span></a>
+    <a class="nav" href="#camera"><span class="nav-icon">◉</span>即時影像分析</a>
+    <a class="nav" href="#analytics"><span class="nav-icon">▥</span>人流數據分析</a>
+    <a class="nav" href="#events"><span class="nav-icon">◇</span>提醒紀錄</a>
+    <a class="nav" href="#settings"><span class="nav-icon">⚙</span>系統設定</a>
+    <div class="sidebar-bottom"><div class="privacy-icon">♧</div><div><b>隱私優先設計</b><p>不辨識身分・不儲存影像</p></div></div>
+  </aside>
+  <main class="main" id="dashboard">
+    <header class="topbar"><div class="breadcrumb">工作空間 <span>/</span> <strong>總覽儀表板</strong></div><div class="top-actions"><span class="today" id="today">—</span><span class="avatar">CE</span></div></header>
+    <div class="content">
+      <div class="hero"><div><div class="eyebrow"><span class="pulse"></span> INTELLIGENT MONITORING SYSTEM</div><h1>智慧空間，一目了然<span class="blue-dot">.</span></h1><p>以匿名影像分析掌握空間使用狀態，讓管理決策更即時、更清晰。</p></div><div class="hero-art" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="orbit"></div><div class="orb-center">◈</div></div></div>
+      <div class="status-line"><span class="pill" id="modePill">● 示範模式</span><span class="mini-note">所有數據皆在本機處理，示範模式使用模擬資料</span><span class="time-note" id="lastUpdate">更新中...</span></div>
+      <section class="metrics" aria-label="摘要">
+        <article class="metric"><div class="metric-header"><span>目前畫面偵測人數</span><span class="metric-symbol tint-blue">♟</span></div><div class="metric-number" id="currentCount">—</div><div class="metric-footer"><span class="metric-tag">REAL-TIME</span><span>非身分識別</span></div></article>
+        <article class="metric"><div class="metric-header"><span>今日平均偵測人數</span><span class="metric-symbol tint-violet">▤</span></div><div class="metric-number" id="avgCount">—</div><div class="metric-footer"><span class="metric-tag">AVERAGE</span><span>每次抽樣平均</span></div></article>
+        <article class="metric"><div class="metric-header"><span>今日最高偵測人數</span><span class="metric-symbol tint-mint">↗</span></div><div class="metric-number" id="peakCount">—</div><div class="metric-footer"><span class="metric-tag">PEAK</span><span>單次畫面峰值</span></div></article>
+        <article class="metric"><div class="metric-header"><span>安全提醒門檻</span><span class="metric-symbol tint-peach">⚑</span></div><div class="metric-number" id="limitCount">—</div><div class="metric-footer"><span class="metric-tag">THRESHOLD</span><span>可於設定調整</span></div></article>
+      </section>
+      <div class="two-col" id="camera">
+        <section class="card camera-card"><div class="card-head"><div><h2>即時影像分析</h2><p>匿名畫面人數估計 · 本機處理</p></div><span class="live-chip" id="liveChip"><span class="pulse"></span> DEMO</span></div>
+          <div class="camera-box"><img id="video" alt="攝影機即時畫面（不儲存影像）" hidden/><div class="camera-placeholder" id="cameraPlaceholder"><div class="camera-circle">◉</div><strong>影像監測預覽</strong><p>啟動攝影機或上傳影片後，畫面會顯示在這裡</p><span>選擇「啟動示範」可先體驗數據介面</span></div><span class="view-corner tl"></span><span class="view-corner tr"></span><span class="view-corner bl"></span><span class="view-corner br"></span></div>
+          <div class="camera-controls"><button class="btn primary" id="startCamera">◉ 啟動攝影機</button><button class="btn secondary" id="startDemo">▶ 啟動示範</button><button class="btn quiet" id="stop">■ 停止</button></div>
+          <div class="upload-controls"><label class="upload-label" for="videoFile">上傳影片分析（MP4 / AVI / MOV / MKV）</label><div class="upload-row"><input id="videoFile" type="file" accept=".mp4,.avi,.mov,.mkv,video/*"/><button class="btn secondary" id="analyzeVideo">▶ 開始分析影片</button></div><p class="setting-hint">單檔上限 150 MB。影片只在本機暫存，分析結束後自動刪除；分析人數是畫面估計值，不是進出或獨立人數。</p></div><div class="inline-feedback" id="feedback"></div><p class="setting-hint" id="detectorInfo">偵測引擎：讀取中…</p>
+        </section>
+        <section class="card insights-card"><div class="card-head"><div><h2>智慧分析中心</h2><p>根據目前偵測狀態給出提醒</p></div><div class="soft-icon">✧</div></div><div class="insight-graphic"><div class="ring"><span id="ringValue">—</span><small>人</small></div><div><span class="insight-caption">目前監測狀態</span><h3 id="insightTitle">尚未開始監測</h3><p id="insightBody">請啟動攝影機或示範模式，開始查看空間使用資訊。</p></div></div><div class="recommendation"><div class="rec-label">✦ 系統建議</div><p id="recommendation">以人數門檻輔助查看人流狀況，所有提示皆需由現場人員確認。</p></div><div class="notice"><span>ⓘ</span> 影像中的人數不等於出入次數，也不能據此判斷逃課或違規。</div></section>
+      </div>
+      <div class="two-col bottom-grid" id="analytics">
+        <section class="card chart-card"><div class="card-head"><div><h2>人流趨勢分析</h2><p>今日每小時平均畫面偵測人數</p></div><span class="chart-legend"><i></i> 偵測人數</span></div><div class="chart-wrap"><canvas id="trendChart" aria-label="每小時平均偵測人數折線圖"></canvas></div></section>
+        <section class="card events-card" id="events"><div class="card-head"><div><h2>最近提醒紀錄</h2><p>偵測數量達到門檻時自動產生</p></div><span class="soft-icon">↗</span></div><div class="events-list" id="eventsList"><div class="empty-state">尚無提醒紀錄</div></div></section>
+      </div>
+      <section class="card settings-card" id="settings"><div class="card-head"><div><h2>系統設定</h2><p>依展示環境調整監測參數</p></div><span class="soft-icon">⚙</span></div><div class="settings-fields"><label>提醒人數門檻<input id="threshold" type="number" min="1" max="100" value="4" /></label><label>攝影機編號<input id="cameraIndex" type="number" min="0" max="5" value="0" /></label><button class="btn primary" id="saveSettings">儲存設定</button></div><p class="setting-hint">攝影機編號通常為 0；若有多支攝影機可嘗試 1。支援 YOLOv8n 多人偵測；未安裝模型時會使用 OpenCV HOG 基礎模式。結果僅供展示參考，不能用於安全決策。</p></section>
+      <footer>© CampusEye AI · 校內專題展示原型 <span>LOCAL-ONLY ANALYTICS · PRIVACY FIRST</span></footer>
+    </div>
+  </main>
+</div>
+</body>
+</html>
