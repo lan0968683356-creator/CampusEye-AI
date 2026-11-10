@@ -1,0 +1,33 @@
+# Build / local environments
+build/
+dist/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Models and user-generated private data
+models/
+temporary_videos/
+*.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal
+*.db
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets*.json
+
+# Installer output (distribute only after review via Releases)
+*.exe
+*.pkg
+*.log
